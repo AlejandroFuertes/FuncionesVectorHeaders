@@ -40,4 +40,6 @@ void intercambiar(int *elemento1, int *elemento2){
     *elemento1 = *elemento2;
     *elemento2 = temporal;
 }
+
+//laksd;lak;las;lda;lskd
 #endif // FUNCIONESVECTOR_H_INCLUDED
