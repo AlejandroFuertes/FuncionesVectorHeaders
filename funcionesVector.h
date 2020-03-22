@@ -32,6 +32,7 @@ void ordenarVectorAsc(int tamanio, int *pVector){
     }
 }
 
+///LE HARIA EL ORTO A VICTORIA
 void intercambiar(int *elemento1, int *elemento2){
 
     int temporal;
