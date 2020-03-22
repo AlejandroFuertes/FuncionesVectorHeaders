@@ -42,4 +42,7 @@ void intercambiar(int *elemento1, int *elemento2){
 }
 
 //laksd;lak;las;lda;lskd
+
+
+//LAPUTAQUETEPARIO
 #endif // FUNCIONESVECTOR_H_INCLUDED
