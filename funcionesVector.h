@@ -147,4 +147,20 @@ int sumaDiagonalPrincipal(int *pMatriz, int ordenN){
     }
     return suma;
 }
+
+int sumaDebajoDiagonalPrincipal(int *pMatriz, int ordenN){
+
+    int suma = 0;
+    for(int i = 0; i < ordenN; i++){
+
+        for(int j = 0; j < ordenN; j++){
+
+            if(i > j){
+
+                suma += *(pMatriz + (i*ordenN) + j);
+            }
+        }
+    }
+    return suma;
+}
 #endif // FUNCIONESVECTOR_H_INCLUDED
