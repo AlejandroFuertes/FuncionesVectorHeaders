@@ -5,19 +5,23 @@
 
 void cargaVector(int tamanio, int *pVector){
 
+    printf("\n ------------------------- \n");
     printf("\n  Ingrese los valores en la posicion: \n");
     for(int i = 0; i < tamanio; i++){
         printf("[%d] : ", i + 1);
         scanf("%d",(pVector + i));
     }
+    printf("\n ------------------------- \n");
 }
 
 void muestraVector(int tamanio,int *pVector){
 
-    printf("\n\n  Los valores del vector son: \n\n");
+    printf("\n ------------------------- \n");
+    printf("\n\n  Los valores del vector actualmente son: \n\n");
     for(int i = 0; i < tamanio; i++){
         printf("  %d \t", *(pVector + i));
     }
+    printf("\n ------------------------- \n");
 }
 
 void ordenarVectorAsc(int tamanio, int *pVector){
@@ -32,7 +36,6 @@ void ordenarVectorAsc(int tamanio, int *pVector){
     }
 }
 
-///LE HARIA EL ORTO A VICTORIA
 void intercambiar(int *elemento1, int *elemento2){
 
     int temporal;
@@ -40,5 +43,93 @@ void intercambiar(int *elemento1, int *elemento2){
     temporal = *elemento1;
     *elemento1 = *elemento2;
     *elemento2 = temporal;
+}
+
+/*
+    FUNCION PARA BUSCAR LOS DATOS EN EL VECTOR, DEVUELVE
+    LA CANTIDAD TOTAL DE DATOS QUE FUERON ENCONTRADOS.
+
+    EJEMPLO: SI MI VECTOR ES : 1 1 5 1
+    Y DESEO ELIMINAR LOS DATOS = 1
+
+    LA FUNCION DEVUELVE 3
+*/
+int devuelveCantTotalEncontrados(int tamanio,int pKey, int *pVector){
+
+    int keyEncontrados = 0;
+    int i = 0;
+    int aux = 0;
+
+    while(aux < tamanio){
+
+        if(pKey == *(pVector + i)){
+            desplazarDatos(i, pVector, tamanio);
+            i = 0;
+            keyEncontrados++;
+        }else{
+            i++;
+        }
+        aux = i;
+    }
+
+    printf("\n  La cantidad de encontrados son %d\n", keyEncontrados);
+
+    return keyEncontrados;
+}
+
+/*
+  SI SE QUITA UN DATO DEL VECTOR, MOVEMOS LOS DATOS QUE QUEDAN
+  HACIA LA IZQUIERDA
+*/
+void desplazarDatos(int indice, int *pVector, int tamanio){
+
+    while(indice < tamanio){
+
+        *(pVector + indice) = *(pVector + indice + 1);
+        indice++;
+    }
+}
+
+void cargaMatriz(int *pMatriz, int pFilas, int pColumnas){
+
+    printf("\n ------------------------- \n");
+    printf("\n  Ingrese los valores en la posicion: \n");
+    int posicion = 0;
+    for(int i = 0; i < pFilas; i++){
+        for(int j = 0; j < pColumnas; j++){
+            printf("[%d][%d] : ", i + 1, j + 1);
+            scanf("%d",(pMatriz + posicion));
+            posicion++;
+        }
+    }
+    printf("\n ------------------------- \n");
+}
+
+void muestraMatriz(int *pMatriz, int pFilas, int pColumnas){
+
+    printf("\n ------------------------- \n");
+    printf("\n  Los valores de la matriz actualmente son: \n");
+    int posicion = 0;
+    for(int i = 0; i < pFilas; i++){
+        for(int j = 0; j < pColumnas; j++){
+            printf("%d \t",*(pMatriz + posicion));
+            posicion++;
+        }
+        printf("\n");
+    }
+    printf("\n ------------------------- \n");
+}
+
+int sumaEncimaDiagonalPrincipal(int *pMatriz, int ordenN){
+
+    int suma = 0;
+    for(int i = 0; i < ordenN - 1; i++){
+
+        for(int j = i + 1; j < ordenN; j++){
+
+            suma += *(pMatriz + i + j);
+        }
+    }
+    return suma;
 }
 #endif // FUNCIONESVECTOR_H_INCLUDED
