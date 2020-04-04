@@ -2,6 +2,7 @@
 #define FUNCIONESVECTOR_H_INCLUDED
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 void cargaVector(int tamanio, int *pVector){
 
@@ -162,5 +163,30 @@ int sumaDebajoDiagonalPrincipal(int *pMatriz, int ordenN){
         }
     }
     return suma;
+}
+
+/*  1 = VERDADERO
+    2 = FALSO
+*/
+bool esMatrizIdentidad(int *pMatriz, int ordenN){
+
+    for(int i = 0; i < ordenN; i++){
+
+        for(int j = 0; j < ordenN; j++){
+
+            if(i == j){
+
+                if(*(pMatriz + (i*ordenN) + j) != 1){
+                    return false;
+                }
+
+            }else{
+                if(*(pMatriz + (i*ordenN) + j) != 0){
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
 }
 #endif // FUNCIONESVECTOR_H_INCLUDED
