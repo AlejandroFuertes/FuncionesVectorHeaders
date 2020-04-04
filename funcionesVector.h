@@ -5,19 +5,23 @@
 
 void cargaVector(int tamanio, int *pVector){
 
+    printf("\n ------------------------- \n");
     printf("\n  Ingrese los valores en la posicion: \n");
     for(int i = 0; i < tamanio; i++){
         printf("[%d] : ", i + 1);
         scanf("%d",(pVector + i));
     }
+    printf("\n ------------------------- \n");
 }
 
 void muestraVector(int tamanio,int *pVector){
 
+    printf("\n ------------------------- \n");
     printf("\n\n  Los valores del vector actualmente son: \n\n");
     for(int i = 0; i < tamanio; i++){
         printf("  %d \t", *(pVector + i));
     }
+    printf("\n ------------------------- \n");
 }
 
 void ordenarVectorAsc(int tamanio, int *pVector){
@@ -84,5 +88,48 @@ void desplazarDatos(int indice, int *pVector, int tamanio){
         *(pVector + indice) = *(pVector + indice + 1);
         indice++;
     }
+}
+
+void cargaMatriz(int *pMatriz, int pFilas, int pColumnas){
+
+    printf("\n ------------------------- \n");
+    printf("\n  Ingrese los valores en la posicion: \n");
+    int posicion = 0;
+    for(int i = 0; i < pFilas; i++){
+        for(int j = 0; j < pColumnas; j++){
+            printf("[%d][%d] : ", i + 1, j + 1);
+            scanf("%d",(pMatriz + posicion));
+            posicion++;
+        }
+    }
+    printf("\n ------------------------- \n");
+}
+
+void muestraMatriz(int *pMatriz, int pFilas, int pColumnas){
+
+    printf("\n ------------------------- \n");
+    printf("\n  Los valores de la matriz actualmente son: \n");
+    int posicion = 0;
+    for(int i = 0; i < pFilas; i++){
+        for(int j = 0; j < pColumnas; j++){
+            printf("%d \t",*(pMatriz + posicion));
+            posicion++;
+        }
+        printf("\n");
+    }
+    printf("\n ------------------------- \n");
+}
+
+int sumaEncimaDiagonalPrincipal(int *pMatriz, int ordenN){
+
+    int suma = 0;
+    for(int i = 0; i < ordenN - 1; i++){
+
+        for(int j = i + 1; j < ordenN; j++){
+
+            suma += *(pMatriz + i + j);
+        }
+    }
+    return suma;
 }
 #endif // FUNCIONESVECTOR_H_INCLUDED
