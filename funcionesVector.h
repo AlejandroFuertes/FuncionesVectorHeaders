@@ -127,7 +127,22 @@ int sumaEncimaDiagonalPrincipal(int *pMatriz, int ordenN){
 
         for(int j = i + 1; j < ordenN; j++){
 
-            suma += *(pMatriz + i + j);
+            suma += *(pMatriz + (i*ordenN) + j);
+        }
+    }
+    return suma;
+}
+
+int sumaDiagonalPrincipal(int *pMatriz, int ordenN){
+
+    int suma = 0;
+    for(int i = 0; i < ordenN; i++){
+
+        for(int j = 0; j < ordenN; j++){
+
+            if(i == j){
+                suma += *(pMatriz + (i*ordenN) + j);
+            }
         }
     }
     return suma;
