@@ -91,6 +91,9 @@ void desplazarDatos(int indice, int *pVector, int tamanio){
     }
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////
+                /*FUNCIONES PARA MATRICES*/
 void cargaMatriz(int *pMatriz, int pFilas, int pColumnas){
 
     printf("\n ------------------------- \n");
@@ -189,4 +192,52 @@ bool esMatrizIdentidad(int *pMatriz, int ordenN){
     }
     return true;
 }
+
+/*
+    MATRIZ DIAGONAL SON AQUELLAS QUE TIENEN CEROS EN TODA SUS POSICIONES MENOS EN LA DIAGONAL PRINCIPAL
+*/
+bool esMatrizDiagonal(int *pMatriz, int ordenN){
+
+    for(int i = 0; i < ordenN; i++){
+        for(int j = 0; j < ordenN; j++){
+
+            if( i != j){
+
+                if(*(pMatriz + (i*ordenN) + j) != 0){
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
+
+int sumaDiagonalSecundaria(int *pMatriz, int ordenN){
+
+    int suma = 0;
+    for(int i = 0; i < ordenN; i++){
+        for(int j = 0; j < ordenN; j++){
+
+            if( i + j == ordenN - 1){
+                suma += *(pMatriz + (i*ordenN) + j);
+            }
+        }
+    }
+    return suma;
+}
+
+bool esMatrizSimetrica(int *pMatriz, int ordenN){
+
+    for(int i = 0; i < ordenN; i++){
+
+        for(int j = 0; j < ordenN; j++){
+
+            if( *(pMatriz + (i*ordenN) + j) != *(pMatriz + (j*ordenN) + i) ){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 #endif // FUNCIONESVECTOR_H_INCLUDED
