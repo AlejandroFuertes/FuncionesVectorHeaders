@@ -18,7 +18,7 @@ void cargaVector(int tamanio, int *pVector){
 void muestraVector(int tamanio,int *pVector){
 
     printf("\n ------------------------- \n");
-    printf("\n\n  Los valores del vector actualmente son: \n\n");
+    printf("\n  Los valores del vector actualmente son: \n");
     for(int i = 0; i < tamanio; i++){
         printf("  %d \t", *(pVector + i));
     }
@@ -91,6 +91,21 @@ void desplazarDatos(int indice, int *pVector, int tamanio){
     }
 }
 
+void validaNroPositivo(int *pNro){
+
+    bool nroPositivo = false;
+    do{
+        if(*(pNro) < 0){
+            nroPositivo = false;
+            printf("\n  El numero debe ser positivo, por favor vuelva a ingresarlo:  ");
+            scanf("%d", pNro);
+        }else{
+            nroPositivo = true;
+        }
+
+    }while(!(nroPositivo == true));
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////////
                 /*FUNCIONES PARA MATRICES*/
