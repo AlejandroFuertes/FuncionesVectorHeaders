@@ -4,31 +4,52 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-void cargaVector(int tamanio, int *pVector){
+void cargaVector(int tamanioVector, int *pVector){
 
     printf("\n ------------------------- \n");
     printf("\n  Ingrese los valores en la posicion: \n");
-    for(int i = 0; i < tamanio; i++){
+    for(int i = 0; i < tamanioVector; i++){
         printf("[%d] : ", i + 1);
         scanf("%d",(pVector + i));
     }
     printf("\n ------------------------- \n");
 }
 
-void muestraVector(int tamanio,int *pVector){
+void cargaVectorFloat(int tamanioVector, float *pVector){
 
     printf("\n ------------------------- \n");
-    printf("\n\n  Los valores del vector actualmente son: \n\n");
-    for(int i = 0; i < tamanio; i++){
+    printf("\n  Ingrese los valores en la posicion: \n");
+    for(int i = 0; i < tamanioVector; i++){
+        printf("[%d] : ", i + 1);
+        scanf("%f",(pVector + i));
+    }
+    printf("\n ------------------------- \n");
+}
+
+void muestraVector(int tamanioVector,int *pVector){
+
+    printf("\n ------------------------- \n");
+    printf("\n  Los valores del vector actualmente son: \n");
+    for(int i = 0; i < tamanioVector; i++){
         printf("  %d \t", *(pVector + i));
     }
     printf("\n ------------------------- \n");
 }
 
-void ordenarVectorAsc(int tamanio, int *pVector){
+void muestraVectorFloat(int tamanioVector,float *pVector){
 
-    for(int i = 0; i < tamanio; i++){
-        for(int j = 0; j < tamanio - 1; j++){
+    printf("\n ------------------------- \n");
+    printf("\n  Los valores del vector actualmente son: \n");
+    for(int i = 0; i < tamanioVector; i++){
+        printf("  %.2f \t", *(pVector + i));
+    }
+    printf("\n ------------------------- \n");
+}
+
+void ordenarVectorAsc(int tamanioVector, int *pVector){
+
+    for(int i = 0; i < tamanioVector; i++){
+        for(int j = 0; j < tamanioVector - 1; j++){
 
             if(*(pVector + j) > *(pVector + (j + 1))){
                 intercambiar(pVector + j, pVector + (j + 1));
@@ -55,16 +76,16 @@ void intercambiar(int *elemento1, int *elemento2){
 
     LA FUNCION DEVUELVE 3
 */
-int devuelveCantTotalEncontrados(int tamanio,int pKey, int *pVector){
+int devuelveCantTotalEncontrados(int tamanioVector,int pKey, int *pVector){
 
     int keyEncontrados = 0;
     int i = 0;
     int aux = 0;
 
-    while(aux < tamanio){
+    while(aux < tamanioVector){
 
         if(pKey == *(pVector + i)){
-            desplazarDatos(i, pVector, tamanio);
+            desplazarDatos(i, pVector, tamanioVector);
             i = 0;
             keyEncontrados++;
         }else{
@@ -82,15 +103,30 @@ int devuelveCantTotalEncontrados(int tamanio,int pKey, int *pVector){
   SI SE QUITA UN DATO DEL VECTOR, MOVEMOS LOS DATOS QUE QUEDAN
   HACIA LA IZQUIERDA
 */
-void desplazarDatos(int indice, int *pVector, int tamanio){
+void desplazarDatos(int indice, int *pVector, int tamanioVector){
 
-    while(indice < tamanio){
+    while(indice < tamanioVector){
 
         *(pVector + indice) = *(pVector + indice + 1);
         indice++;
     }
 }
 
+void validaNroPositivo(int *pNro){
+
+    bool nroPositivo = false;
+    do{
+        if(*(pNro) < 0){
+            nroPositivo = false;
+            printf("\n  El numero debe ser positivo, por favor vuelva a ingresarlo:  ");
+            scanf("%d", pNro);
+        }else{
+            nroPositivo = true;
+        }
+
+    }while(!(nroPositivo == true));
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////////
                 /*FUNCIONES PARA MATRICES*/
