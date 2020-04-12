@@ -41,7 +41,7 @@ void muestraVectorFloat(int tamanioVector,float *pVector){
     printf("\n ------------------------- \n");
     printf("\n  Los valores del vector actualmente son: \n");
     for(int i = 0; i < tamanioVector; i++){
-        printf("  %f \t", *(pVector + i));
+        printf("  %.2f \t", *(pVector + i));
     }
     printf("\n ------------------------- \n");
 }
