@@ -1,9 +1,13 @@
-#ifndef FUNCIONESVECTOR_H_INCLUDED
-#define FUNCIONESVECTOR_H_INCLUDED
+#ifndef FUNCIONESHEADERS_H_INCLUDED
+#define FUNCIONESHEADERS_H_INCLUDED
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <conio.h>
+
+/* FUNCIONES */
 
 void cargaVector(int tamanioVector, int *pVector){
 
@@ -44,6 +48,16 @@ void muestraVectorFloat(int tamanioVector,float *pVector){
     printf("\n ------------------------- \n");
     printf("\n  Los valores del vector actualmente son: \n");
     for(int i = 0; i < tamanioVector; i++){
+        printf("  %.2f \t", *(pVector + i));
+    }
+    printf("\n ------------------------- \n");
+}
+
+void muestraVectorFloatOrdenInverso(float *pVector, int pTamanio){
+
+    printf("\n ------------------------- \n");
+    printf("\n  Los valores del vector inverso son: \n");
+    for(int i = pTamanio - 1; i >= 0; i--){
         printf("  %.2f \t", *(pVector + i));
     }
     printf("\n ------------------------- \n");
@@ -115,6 +129,67 @@ void desplazarDatos(int indice, int *pVector, int tamanioVector){
     }
 }
 
+/*FUNCION PARA CONTAR CUANTOS DATOS SE INTRODUCEN EN UN VECTOR*/
+int cuentaDatosAlCargarVector(int tamanioVector, float *pVector){
+
+    char continuar;
+    int cuentaDatosIntroducidos = 0;
+    int indice = 0;
+
+    printf("\n  %cDesea introducir un dato (S/N)?    ",168);
+    fflush(stdin);
+    scanf("%c", &continuar);
+    validarSoN(&continuar);
+
+    (continuar != 'S')? printf("\n") : printf("\n  Ingrese los datos en las siguientes posiciones: ");
+
+    while(continuar == 'S'){
+
+        printf("\n  Posicion [%d]:  ", indice + 1);
+        fflush(stdin);
+        scanf("%f",(pVector + indice));
+
+        cuentaDatosIntroducidos++;
+
+        indice++;
+
+        if(indice < tamanioVector){
+            printf("\n  %cDesea introducir otro dato (S/N)?    ",168);
+            fflush(stdin);
+            scanf("%c", &continuar);
+            validarSoN(&continuar);
+        }else{
+            continuar = "N";
+        }
+    }
+
+    return cuentaDatosIntroducidos;
+}
+
+float devuelveElMinimo(float *pVector, int pTamanio){
+
+    float valorMinimo = *(pVector);
+
+    for(int i = 1; i < pTamanio; i++){
+
+        if(*(pVector + i) < valorMinimo){
+            valorMinimo = *(pVector + i);
+        }
+    }
+    return valorMinimo;
+}
+
+float promedioPosicionesPares(float *pVector, int pTamanio){
+
+    float suma = 0, promedio = 0;
+    for(int i = 0; i < pTamanio; i += 2){
+
+        suma += *(pVector + i);
+    }
+    promedio = (suma / pTamanio ) ;
+    return promedio;
+}
+
 void validaNroPositivo(int *pNro){
 
     bool nroPositivo = false;
@@ -128,7 +203,26 @@ void validaNroPositivo(int *pNro){
         }
 
     }while(!(nroPositivo == true));
+}
 
+void validarSoN(char *opcion){
+
+    bool salir = false;
+    do{
+        /* MEDIANTE LA TABLA ASCII TRANSFORMA DE s a S */
+        if(*opcion == 's' || *opcion == 'n'){
+            *opcion = *opcion - 32;
+            salir = true;
+        }
+
+        if(*opcion != 'S' && *opcion != 'N'){
+            salir = false;
+            printf("\n  Valor incorrecto vuelva a ingresarlo (S/N):    ");
+            fflush(stdin);
+            scanf("%c", opcion);
+        }
+
+    }while(!(salir == true));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -279,4 +373,71 @@ bool esMatrizSimetrica(int *pMatriz, int ordenN){
     return true;
 }
 
-#endif // FUNCIONESVECTOR_H_INCLUDED
+////////////////////////////////////////////////////////////////////////////////////////////
+/* FUNCIONES CADENAS */
+
+void cargarCadena(char *cadena, int tamanio){
+    printf("\n  Ingrese el texto o cadena:  ");
+    fgets(cadena,tamanio, stdin);
+    fflush(stdin);
+}
+
+void mostrarCadena(char *cadena){
+    printf("%s",cadena);
+}
+
+/*FUNCION PARA IGNORAR LAS LETRAS Y QUEDARSE CON LOS NUMEROS QUE ESTEN EN FORMATO CARACTER*/
+int caracterValido(const char caracter){
+    return caracter >= '0' && caracter <= '9';
+}
+
+/*TRANSFORMA NUMEROS DE CARACTERES A ENTEROS*/
+int mi_Atoi(const char *cadena, int tamanio){
+
+    //VARIABLE PARA RECORRER EL VECTOR DE FIN A INICIO
+    int i = tamanio - 1;
+    //VARIABLE PARA UNIDAD, DECENA, CENTENA, ETC
+    int pos = 1;
+    //VARIABLE PARA IR ARMANDO EL NUMERO DE CHAR A INT
+    int armandoNro = 0;
+    while(i >= 0){
+
+        while(caracterValido(*(cadena + i))){
+
+            armandoNro = armandoNro + (*(cadena + i) - 48) * pos;
+            pos *= 10;
+            i--;
+        }
+        i--;
+    }
+    return armandoNro;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+/*FUNCIONES PARA ARCHIVOS*/
+
+void cargarVectorEnArchivo(float *pVector, char *pNombreArchivo, int tamanio){
+
+    FILE *ptrArchivo = NULL;
+
+    strcat(pNombreArchivo, ".txt");
+
+    ptrArchivo = fopen(pNombreArchivo, "w");
+
+    if(ptrArchivo == NULL){
+
+        printf("\n  No se pudo crear el archivo");
+    }
+
+    for(int i = 0; i < tamanio; i++){
+
+        fprintf(ptrArchivo, "%f \n", *(pVector + i));
+    }
+
+    printf("\n  Datos Guardados Correctamente!");
+
+    fclose(ptrArchivo);
+
+}
+
+#endif // FUNCIONESHEADERS_H_INCLUDED
