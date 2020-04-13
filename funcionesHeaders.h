@@ -75,6 +75,18 @@ void ordenarVectorAsc(int tamanioVector, int *pVector){
     }
 }
 
+void ordenarVectorDesc(int tamanioVector, int *pVector){
+
+    for(int i = 0; i < tamanioVector; i++){
+        for(int j = 0; j < tamanioVector - 1; j++){
+
+            if(*(pVector + j) < *(pVector + (j + 1))){
+                intercambiar(pVector + j, pVector + (j + 1));
+            }
+        }
+    }
+}
+
 void intercambiar(int *elemento1, int *elemento2){
 
     int temporal;
@@ -188,6 +200,23 @@ float promedioPosicionesPares(float *pVector, int pTamanio){
     }
     promedio = (suma / pTamanio ) ;
     return promedio;
+}
+
+int* devuelvePosicionMemoriaDato(int *pVector, int pKey, int tamanioVector){
+
+    int *posicionMemoriaDato = NULL;
+    int cantidadEncontrado = 0;
+    int indice = 0;
+
+    while(indice < tamanioVector){
+
+        if(pKey == *(pVector + indice)){
+            posicionMemoriaDato = (pVector + indice);
+
+        }
+        indice++;
+    }
+    return posicionMemoriaDato;
 }
 
 void validaNroPositivo(int *pNro){
