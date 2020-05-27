@@ -154,7 +154,7 @@ void diaFecha(Fecha *pFecha){ //FORMULA D=[N+M+A+(A/4)+Ks]%7
         sabado
     };
 
-    int mes[12]={0,3,3,6,1,4,6,2,5,0,3,5},ks,resultado; //SI ES BISIESTO {6,2,...........}
+    int mes[12]={0,3,3,6,1,4,6,2,5,0,3,5},ks; //SI ES BISIESTO {6,2,...........}
 
     enum diaSemana dia;
 

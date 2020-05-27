@@ -445,7 +445,7 @@ int mi_Atoi(const char *cadena, int tamanio){
 ////////////////////////////////////////////////////////////////////////////////////////
 /*FUNCIONES PARA ARCHIVOS*/
 
-void cargarVectorEnArchivo(float *pVector, char *pNombreArchivo, int tamanio){
+void cargarVectorFloatEnArchivo(float *pVector, char *pNombreArchivo, int tamanio){
 
     FILE *ptrArchivo = NULL;
 
